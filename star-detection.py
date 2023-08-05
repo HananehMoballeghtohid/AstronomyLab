@@ -12,7 +12,7 @@ def main():
     fits_file.plot_file()
 
     # detecting stars using photutils:
-    star_finder = StarFinder(60000, 15, fits_image)
+    star_finder = StarFinder(40000, 10, fits_image)
     star_finder.print_detected_coordinates()
     star_finder.plot_detected_coordinates()
 

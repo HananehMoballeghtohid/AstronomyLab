@@ -28,3 +28,15 @@ class FitsHandler:
         plt.figure()
         plt.imshow(self.fits_image, cmap='gray')
         plt.show()
+
+    def plot_histogram_of_region(self, region):
+        x1, y1, x2, y2 = region
+        region_data = self.fits_image[y1:y2, x1:x2]
+        plot_file(region_data)
+        plt.figure()
+        plt.hist(region_data.flatten(), bins=100, color='b', range=[1, 20000])
+        plt.xlabel('Pixel Value')
+        plt.ylabel('Frequency')
+        plt.title('Histogram of the Region')
+        plt.grid(True)
+        plt.show()
