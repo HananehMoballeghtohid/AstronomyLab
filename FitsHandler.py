@@ -47,14 +47,14 @@ class FitsHandler:
     def calculate_flux_of_region(self, region) -> float:
         x1, y1, x2, y2 = region
         sum_flux = 0
-        for i in range(x1, x2):
-            for j in range(y1, y2):
+        for i in range(y1, y2):
+            for j in range(x1, x2):
                 sum_flux += self.fits_image[i, j]
         return sum_flux
 
     def calculate_mean_pixel_flux(self, region) -> ndarray:
         x1, y1, x2, y2 = region
-        region_data = self.fits_image[x1:x2, y1:y2]
+        region_data = self.fits_image[y1:y2, x1:x2]
         return np.mean(region_data)
 
     def find_darkest_area(self, size):

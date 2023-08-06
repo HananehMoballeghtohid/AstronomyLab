@@ -14,18 +14,20 @@ def main():
     pixel_size = 4.30 * 1e-6
     fits_file = FitsHandler(fits_path, focal_length, pixel_size)
 
-    # finding the darkest area and its mean pixel flux:
-    darkest_area_x, darkest_area_y, pixel_mean_flux = fits_file.find_darkest_area(100)
-    print('The darkest area in the file starts at: ', darkest_area_x, ', ', darkest_area_y)
-    print('The average pixel flux in the area is: ', pixel_mean_flux)
-
-    # plotting histogram:
-    region = [darkest_area_x, darkest_area_y, darkest_area_x + 100, darkest_area_y + 100]
-    fits_file.plot_histogram_of_region(region)
-
     # calculating pixel scale
     pixel_scale = fits_file.get_pixel_scale_by_arcsecond()
     print("Pixel scale: {:.2f} arcseconds/pixel".format(pixel_scale))
+
+    # finding the darkest area and its mean pixel flux and std:
+    darkest_area_x, darkest_area_y, pixel_mean_flux, flux_std = fits_file.find_darkest_area(100)
+    print('The darkest area in the file starts at:', darkest_area_x, ',', darkest_area_y)
+    print('The average pixel flux in the area is:', pixel_mean_flux)
+
+    # plotting histogram:
+    region = [darkest_area_x, darkest_area_y,
+              darkest_area_x + 100,
+              darkest_area_y + 100]
+    fits_file.plot_histogram_of_region(region)
 
     # calculating flux by arcseconds squared
     arc_square_mean_flux = pixel_mean_flux / (pixel_scale ** 2)
