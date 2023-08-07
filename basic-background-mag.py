@@ -4,10 +4,6 @@ import numpy as np
 
 from FitsHandler import FitsHandler
 
-"""
-Author: Hananeh Moballeghtohid
-"""
-
 
 def main():
     # importing fits file:
@@ -32,6 +28,9 @@ def main():
               darkest_area_x + 100,
               darkest_area_y + 100]
     fits_file.plot_histogram_of_region(region)
+
+    # plotting red box around the area:
+    fits_file.draw_red_box(region)
 
     # calculating flux by arcseconds squared
     arc_square_mean_flux = pixel_mean_flux / (pixel_scale ** 2)

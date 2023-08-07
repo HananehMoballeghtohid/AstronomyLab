@@ -1,11 +1,8 @@
 import numpy as np
 from astropy.io import fits
 from matplotlib import pyplot as plt
+from matplotlib.patches import Rectangle
 from numpy import ndarray
-
-"""
-Author: Hananeh Moballeghtohid
-"""
 
 
 def plot_file(image: np.ndarray):
@@ -82,3 +79,14 @@ class FitsHandler:
 
     def get_pixel_scale_by_arcsecond(self) -> float:
         return (206265*self.pixel_size)/self.focal_length
+
+    def draw_red_box(self, region):
+        print("drawing red box around region...")
+        plt.imshow(self.fits_image, cmap='gray')
+        rect = Rectangle((region[0], region[1]), region[2] - region[0], region[3] - region[1],
+                         linewidth=2, edgecolor='r', facecolor='none')
+        plt.gca().add_patch(rect)
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.title('Image with Red Box Around Selected Region')
+        plt.show()
