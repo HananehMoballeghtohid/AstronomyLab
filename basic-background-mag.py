@@ -4,6 +4,10 @@ import numpy as np
 
 from FitsHandler import FitsHandler
 
+"""
+Author: Hananeh Moballeghtohid
+"""
+
 
 def main():
     # importing fits file:
@@ -19,7 +23,7 @@ def main():
     print("Pixel scale: {:.2f} arcseconds/pixel".format(pixel_scale))
 
     # finding the darkest area and its mean pixel flux and std:
-    darkest_area_x, darkest_area_y, pixel_mean_flux, flux_std = fits_file.find_darkest_area(100)
+    darkest_area_x, darkest_area_y, pixel_mean_flux = fits_file.find_darkest_area(100)
     print('The darkest area in the file starts at:', darkest_area_x, ',', darkest_area_y)
     print('The average pixel flux in the area is:', pixel_mean_flux)
 
@@ -33,9 +37,9 @@ def main():
     arc_square_mean_flux = pixel_mean_flux / (pixel_scale ** 2)
     print("mean flux in one arcseconds squared: {:.2f} flux/arcsecond^2".format(arc_square_mean_flux))
 
-    # calculating magnitude
+    # calculating magnitude (the reference mag and flux are given):
     reference_mag = 8.88
-    reference_flux = 28535.57
+    reference_flux = 17570840.26
     magnitude = reference_mag - 2.5 * np.log10(arc_square_mean_flux / reference_flux)
     print("magnitude of background sky: {:.2f} mag/arcsecond^2".format(magnitude))
 

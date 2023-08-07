@@ -3,6 +3,10 @@ from astropy.io import fits
 from matplotlib import pyplot as plt
 from numpy import ndarray
 
+"""
+Author: Hananeh Moballeghtohid
+"""
+
 
 def plot_file(image: np.ndarray):
     print("plotting fits file...")

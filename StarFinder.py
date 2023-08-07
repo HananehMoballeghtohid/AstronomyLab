@@ -2,6 +2,10 @@ import numpy as np
 from matplotlib import pyplot as plt
 from photutils.detection import DAOStarFinder
 
+"""
+Author: Hananeh Moballeghtohid
+"""
+
 
 class StarFinder:
     def __init__(self, threshold: int, fwhm: int, star_image: np.ndarray):
