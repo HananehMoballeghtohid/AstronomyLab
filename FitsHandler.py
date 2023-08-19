@@ -24,6 +24,12 @@ class FitsHandler:
         self.focal_length: int = focal_length
         self.pixel_size: float = pixel_size
 
+    def get_grayscale(self):
+        self.fits_image = np.dot(self.fits_image.T, [0.2989, 0.5870, 0.1140])
+
+    def get_filtered(self):
+        self.fits_image = np.dot(self.fits_image.T, [0, 0, 1])
+
     def get_file(self) -> np.ndarray:
         return self.fits_image
 
