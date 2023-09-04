@@ -8,12 +8,11 @@ from numpy import ndarray
 def plot_file(image: np.ndarray):
     print("plotting fits file...")
     plt.figure()
-    plt.imshow(image, cmap='gray')
+    plt.imshow(image)
     plt.show()
 
 
 class FitsHandler:
-
     def __init__(self, fits_path: str, focal_length: int, pixel_size: float):
         self.fits_path: str = fits_path
         print("reading fits file...")
@@ -25,13 +24,13 @@ class FitsHandler:
         self.pixel_size: float = pixel_size
 
     def get_grayscale(self):
-        self.fits_image = np.dot(self.fits_image.T, [0.2989, 0.5870, 0.1140])
+        return np.dot(self.fits_image.T, [0.2989, 0.5870, 0.1140])
 
     def get_filtered(self):
-        self.fits_image = np.dot(self.fits_image.T, [0, 0, 1])
+        return np.dot(self.fits_image.T, [0, 0, 1])
 
-    def get_file(self) -> np.ndarray:
-        return self.fits_image
+    def get_image(self) -> np.ndarray:
+        return np.sum(self.fits_image, axis=0)
 
     def plot_file(self):
         print("plotting fits file...")
@@ -84,7 +83,7 @@ class FitsHandler:
         return darkest_area_x, darkest_area_y, min_average_value
 
     def get_pixel_scale_by_arcsecond(self) -> float:
-        return (206265*self.pixel_size)/self.focal_length
+        return (206265 * self.pixel_size) / self.focal_length
 
     def draw_red_box(self, region):
         print("drawing red box around region...")
